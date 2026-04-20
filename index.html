@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Be Clean Booking</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 20px;
+    }
+    .card {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: none;
+      background: black;
+      color: white;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Be Clean</h1>
+
+  <p><b>Call/Text:</b> 616-737-1442</p>
+
+  <label>Service</label>
+  <select>
+    <option>Deep Clean</option>
+    <option>Weekly Clean</option>
+    <option>Biweekly Clean</option>
+    <option>Move In/Out Clean</option>
+    <option>Commercial Clean</option>
+  </select>
+
+  <label>Name</label>
+  <input placeholder="Your name">
+
+  <label>Phone</label>
+  <input placeholder="Your phone">
+
+  <label>Address</label>
+  <input placeholder="Service address">
+
+  <button onclick="alert('Booking request sent! Text 616-737-1442 to confirm.')">
+    Request Booking
+  </button>
+</div>
+
+</body>
+</html>
