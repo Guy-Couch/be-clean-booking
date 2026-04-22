@@ -1,814 +1,240 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Be Clean</title>
-  <style>
-    :root{
-      --blue:#0b57d0;
-      --blue-dark:#083b8c;
-      --green:#78c21c;
-      --green-dark:#5ea10d;
-      --bg:#eef5fb;
-      --card:#ffffff;
-      --text:#173055;
-      --muted:#6a7a96;
-      --line:#d9e4f2;
-      --shadow:0 12px 30px rgba(15,40,85,.12);
-      --radius:24px;
-    }
-
-    *{box-sizing:border-box}
-
-    body{
-      margin:0;
-      font-family:Arial, Helvetica, sans-serif;
-      background:linear-gradient(180deg,#edf5fb 0%, #f9fcff 100%);
-      color:var(--text);
-    }
-
-    .container{
-      max-width:1100px;
-      margin:0 auto;
-      padding:18px;
-    }
-
-    .hero{
-      background:linear-gradient(135deg,var(--blue) 0%, var(--blue-dark) 100%);
-      color:white;
-      border-radius:30px;
-      padding:28px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      position:relative;
-    }
-
-    .hero::before,
-    .hero::after{
-      content:"";
-      position:absolute;
-      border-radius:50%;
-      background:rgba(255,255,255,.10);
-    }
-
-    .hero::before{
-      width:220px;
-      height:220px;
-      right:-60px;
-      top:-60px;
-    }
-
-    .hero::after{
-      width:140px;
-      height:140px;
-      right:120px;
-      bottom:-60px;
-    }
-
-    .hero-grid{
-      position:relative;
-      z-index:1;
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:22px;
-      align-items:center;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      margin-bottom:16px;
-    }
-
-    .logo{
-      width:74px;
-      height:74px;
-      border-radius:50%;
-      background:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:34px;
-      box-shadow:0 10px 24px rgba(0,0,0,.18);
-      flex-shrink:0;
-    }
-
-    .brand h1{
-      margin:0;
-      font-size:54px;
-      line-height:1;
-      letter-spacing:-.03em;
-    }
-
-    .brand .green{
-      color:#9ae52b;
-      font-style:italic;
-    }
-
-    .subhead{
-      margin:4px 0 0;
-      font-size:14px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      font-weight:bold;
-      color:rgba(255,255,255,.88);
-    }
-
-    .headline{
-      margin:8px 0 12px;
-      font-size:56px;
-      line-height:.98;
-      font-weight:800;
-      letter-spacing:-.04em;
-    }
-
-    .headline .green{
-      color:#9ae52b;
-      font-style:italic;
-    }
-
-    .hero p{
-      margin:0 0 18px;
-      max-width:560px;
-      color:rgba(255,255,255,.92);
-      line-height:1.5;
-      font-size:18px;
-    }
-
-    .contact-buttons{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-    }
-
-    .contact-btn{
-      text-decoration:none;
-      color:#fff;
-      font-weight:800;
-      font-size:20px;
-      padding:16px 22px;
-      border-radius:999px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      min-width:230px;
-      box-shadow:0 10px 20px rgba(0,0,0,.16);
-    }
-
-    .call-btn{background:var(--green)}
-    .text-btn{background:#2383ff}
-
-    .hero-art{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      min-height:280px;
-    }
-
-    .art-box{
-      font-size:120px;
-      filter:drop-shadow(0 14px 22px rgba(0,0,0,.25));
-    }
-
-    .wave{
-      height:32px;
-      background:linear-gradient(180deg,#98d845 0%, #caee93 100%);
-      border-radius:0 0 26px 26px;
-      margin-top:-10px;
-      position:relative;
-      z-index:2;
-    }
-
-    .wave::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:#fff;
-      clip-path:ellipse(70% 100% at 50% 0%);
-      border-radius:0 0 26px 26px;
-    }
-
-    .main-grid{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:320px 1fr;
-      gap:18px;
-    }
-
-    .panel{
-      background:var(--card);
-      border-radius:26px;
-      box-shadow:var(--shadow);
-      padding:22px;
-      border:1px solid rgba(10,40,90,.05);
-    }
-
-    .panel h2{
-      margin:0;
-      color:#163d79;
-      font-size:28px;
-    }
-
-    .underline{
-      width:56px;
-      height:4px;
-      background:var(--green);
-      border-radius:999px;
-      margin:12px 0 18px;
-    }
-
-    .panel-copy{
-      margin:0 0 16px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.5;
-    }
-
-    .service-card{
-      display:flex;
-      gap:14px;
-      align-items:flex-start;
-      background:#f4f8fd;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-      margin-bottom:12px;
-    }
-
-    .service-icon{
-      width:56px;
-      height:56px;
-      border-radius:16px;
-      background:#fff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:28px;
-      box-shadow:0 6px 12px rgba(0,0,0,.08);
-      flex-shrink:0;
-    }
-
-    .service-card h3{
-      margin:2px 0 6px;
-      font-size:19px;
-      color:#16396f;
-    }
-
-    .service-card p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.4;
-      font-size:14px;
-    }
-
-    .price-box{
-      margin-top:14px;
-      background:#eef9e5;
-      border:1px solid #d4ecbf;
-      border-radius:18px;
-      padding:18px;
-    }
-
-    .price-box strong{
-      display:block;
-      font-size:30px;
-      color:#57a600;
-      margin-bottom:8px;
-    }
-
-    .price-box span{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.5;
-    }
-
-    .trust-box{
-      margin-top:14px;
-      background:#f7fbff;
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:16px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.5;
-    }
-
-    .trust-box strong{
-      display:block;
-      color:#173b72;
-      font-size:16px;
-      margin-bottom:6px;
-    }
-
-    .form-head{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      margin-bottom:6px;
-    }
-
-    .form-head-icon{
-      width:48px;
-      height:48px;
-      border-radius:14px;
-      background:#edf5ff;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:26px;
-    }
-
-    form{
-      margin-top:18px;
-    }
-
-    .form-grid{
-      display:grid;
-      gap:16px;
-    }
-
-    .two-col{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:16px;
-    }
-
-    label{
-      display:block;
-      margin-bottom:8px;
-      font-size:15px;
-      font-weight:700;
-      color:#173b72;
-    }
-
-    input, select, textarea{
-      width:100%;
-      padding:15px 16px;
-      border:1px solid #cddcec;
-      border-radius:14px;
-      font-size:16px;
-      color:var(--text);
-      background:#fff;
-      outline:none;
-      transition:.15s ease;
-    }
-
-    textarea{
-      min-height:110px;
-      resize:vertical;
-    }
-
-    input:focus, select:focus, textarea:focus{
-      border-color:#68a5ff;
-      box-shadow:0 0 0 4px rgba(36,130,255,.12);
-    }
-
-    .success{
-      display:none;
-      margin-bottom:14px;
-      background:#ebfff2;
-      color:#0f6a3d;
-      border:1px solid #b7efcb;
-      border-radius:18px;
-      padding:16px;
-      line-height:1.5;
-      font-size:14px;
-    }
-
-    .summary{
-      background:#eef5ff;
-      border:1px solid #d4e2f1;
-      border-radius:18px;
-      padding:16px;
-    }
-
-    .summary-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-bottom:12px;
-    }
-
-    .summary-head h3{
-      margin:0;
-      font-size:22px;
-      color:#1752aa;
-    }
-
-    .summary-grid{
-      display:grid;
-      grid-template-columns:1fr 1fr 1fr;
-      gap:12px;
-    }
-
-    .summary-item{
-      background:rgba(255,255,255,.65);
-      border-radius:14px;
-      padding:12px;
-    }
-
-    .summary-item small{
-      display:block;
-      color:var(--muted);
-      margin-bottom:6px;
-      font-size:13px;
-    }
-
-    .summary-item strong{
-      display:block;
-      color:#163c72;
-      font-size:17px;
-    }
-
-    .cta{
-      width:100%;
-      margin-top:16px;
-      border:none;
-      background:var(--green);
-      color:#fff;
-      border-radius:18px;
-      padding:18px 20px;
-      font-size:22px;
-      font-weight:800;
-      cursor:pointer;
-      box-shadow:0 10px 18px rgba(118,194,14,.28);
-    }
-
-    .cta:hover{
-      background:var(--green-dark);
-    }
-
-    .after-note{
-      margin-top:14px;
-      text-align:center;
-      color:#38557f;
-      font-size:14px;
-      line-height:1.5;
-    }
-
-    .features{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:14px;
-      background:#fff;
-      border-radius:24px;
-      box-shadow:var(--shadow);
-      padding:18px;
-    }
-
-    .feature{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      padding:8px;
-    }
-
-    .feature-icon{
-      width:48px;
-      height:48px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:24px;
-      flex-shrink:0;
-      background:#edf5ff;
-    }
-
-    .feature:nth-child(2) .feature-icon,
-    .feature:nth-child(4) .feature-icon{
-      background:#edf8df;
-    }
-
-    .feature strong{
-      display:block;
-      margin-bottom:4px;
-      font-size:17px;
-      color:#173b72;
-    }
-
-    .feature span{
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.45;
-    }
-
-    .footer{
-      margin-top:18px;
-      background:linear-gradient(135deg,var(--blue) 0%, var(--blue-dark) 100%);
-      color:#fff;
-      border-radius:22px;
-      box-shadow:var(--shadow);
-      padding:18px 22px;
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:space-between;
-      gap:12px;
-      font-weight:700;
-    }
-
-    @media (max-width: 980px){
-      .hero-grid,
-      .main-grid,
-      .features{
-        grid-template-columns:1fr;
-      }
-
-      .hero-art{
-        min-height:180px;
-      }
-    }
-
-    @media (max-width: 700px){
-      .brand h1{font-size:42px}
-      .headline{font-size:42px}
-      .contact-buttons{flex-direction:column}
-      .contact-btn{min-width:unset;width:100%}
-      .two-col,
-      .summary-grid{
-        grid-template-columns:1fr;
-      }
-      .container{padding:14px}
-      .hero{padding:22px 18px 30px}
-      .panel{padding:18px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be Clean</title>
+
+<style>
+body {
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f4f7fb;
+}
+
+/* HERO */
+.hero {
+  background:linear-gradient(135deg,#0b57d0,#083b8c);
+  color:white;
+  padding:25px;
+  border-radius:0 0 25px 25px;
+}
+
+.logo {
+  font-size:40px;
+}
+
+h1 {
+  margin:10px 0 0;
+  font-size:40px;
+}
+
+.green {
+  color:#9ae52b;
+}
+
+.headline {
+  font-size:36px;
+  font-weight:bold;
+  margin:10px 0;
+}
+
+p {
+  line-height:1.5;
+}
+
+/* BADGES */
+.badges {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin:15px 0;
+}
+
+.badge {
+  background:rgba(255,255,255,.15);
+  padding:12px;
+  border-radius:15px;
+  text-align:center;
+  font-size:13px;
+}
+
+/* BUTTONS */
+.contact-buttons {
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:10px;
+}
+
+.contact-btn {
+  text-decoration:none;
+  color:white;
+  padding:14px;
+  border-radius:20px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.call-btn {background:#78c21c;}
+.text-btn {background:#2383ff;}
+
+/* CONTENT */
+.container {
+  padding:15px;
+}
+
+/* SERVICE CARDS */
+.card {
+  background:white;
+  padding:15px;
+  border-radius:15px;
+  margin-bottom:10px;
+  box-shadow:0 5px 10px rgba(0,0,0,.05);
+}
+
+.price {
+  background:#e8f7d9;
+  padding:15px;
+  border-radius:15px;
+  margin-top:10px;
+}
+
+/* FORM */
+input, select, textarea {
+  width:100%;
+  padding:12px;
+  margin-bottom:10px;
+  border-radius:10px;
+  border:1px solid #ccc;
+}
+
+button {
+  width:100%;
+  padding:15px;
+  border:none;
+  background:#78c21c;
+  color:white;
+  border-radius:15px;
+  font-size:18px;
+  font-weight:bold;
+}
+
+/* SUMMARY */
+.summary {
+  background:#eef5ff;
+  padding:15px;
+  border-radius:15px;
+}
+</style>
 </head>
+
 <body>
-  <div class="container">
-    <section class="hero">
-      <div class="hero-grid">
-        <div>
-          <div class="brand">
-            <div class="logo">🏠</div>
-            <div>
-              <h1>Be <span class="green">Clean</span></h1>
-              <div class="subhead">Professional Cleaning Services</div>
-            </div>
-          </div>
 
-          <div class="headline">
-            A cleaner space.<br>
-            A <span class="green">better</span> place.
-          </div>
+<!-- HERO -->
+<div class="hero">
 
-          <p>
-            Fast, friendly, professional cleaning requests for homes and businesses. Available 24/7 for deep cleans, recurring service, move-in/move-out jobs, and commercial cleaning.
-          </p>
+  <div class="logo">🏠</div>
 
-          <div class="contact-buttons">
-            <a class="contact-btn call-btn" href="tel:16167371442">📞 Call 616-737-1442</a>
-            <a class="contact-btn text-btn" href="sms:16167371442">💬 Text 616-737-1442</a>
-          </div>
-        </div>
+  <h1>Be <span class="green">Clean</span></h1>
 
-        <div class="hero-art">
-          <div class="art-box">🪣🧴✨</div>
-        </div>
-      </div>
-    </section>
-
-    <div class="wave"></div>
-
-    <div class="main-grid">
-      <aside class="panel">
-        <h2>Our Services</h2>
-        <div class="underline"></div>
-
-        <div class="service-card">
-          <div class="service-icon">🧽</div>
-          <div>
-            <h3>Deep Clean</h3>
-            <p>Top to bottom detailed cleaning for kitchens, bathrooms, floors, and more.</p>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon">📅</div>
-          <div>
-            <h3>Weekly Clean</h3>
-            <p>Keep your home or office consistently fresh and under control.</p>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon">🗓️</div>
-          <div>
-            <h3>Biweekly Clean</h3>
-            <p>Perfect every-two-week scheduling for regular maintenance cleaning.</p>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon">🚚</div>
-          <div>
-            <h3>Move In / Move Out</h3>
-            <p>Fresh-start cleaning for apartments, rentals, and home transitions.</p>
-          </div>
-        </div>
-
-        <div class="service-card">
-          <div class="service-icon">🏢</div>
-          <div>
-            <h3>Commercial Clean</h3>
-            <p>Professional cleaning for offices and business spaces.</p>
-          </div>
-        </div>
-
-        <div class="price-box">
-          <strong>$35 / hour</strong>
-          <span><b>Available 24/7</b><br>We work around your schedule.</span>
-        </div>
-
-        <div class="trust-box">
-          <strong>🛡️ Trusted • Reliable • Insured</strong>
-          Your satisfaction is our priority.
-        </div>
-      </aside>
-
-      <section class="panel">
-        <div class="form-head">
-          <div class="form-head-icon">🗓️</div>
-          <div>
-            <h2 style="margin:0;">Request a Booking</h2>
-            <p class="panel-copy" style="margin:6px 0 0;">Fill out the form below and call or text to confirm your appointment.</p>
-          </div>
-        </div>
-
-        <div class="success" id="successBox">
-          Booking request received. Please call or text <strong>616-737-1442</strong> now to confirm your appointment details.
-        </div>
-
-        <form id="bookingForm">
-          <div class="form-grid">
-            <div>
-              <label for="service">Service</label>
-              <select id="service" required>
-                <option value="Deep Clean">Deep Clean</option>
-                <option value="Weekly Clean">Weekly Clean</option>
-                <option value="Biweekly Clean">Biweekly Clean</option>
-                <option value="Move In / Move Out">Move In / Move Out</option>
-                <option value="Commercial Clean">Commercial Clean</option>
-              </select>
-            </div>
-
-            <div class="two-col">
-              <div>
-                <label for="date">Preferred Date</label>
-                <input id="date" type="date" required>
-              </div>
-              <div>
-                <label for="time">Preferred Time</label>
-                <input id="time" type="time" required>
-              </div>
-            </div>
-
-            <div>
-              <label for="name">Your Name</label>
-              <input id="name" type="text" placeholder="Full name" required>
-            </div>
-
-            <div class="two-col">
-              <div>
-                <label for="phone">Phone Number</label>
-                <input id="phone" type="tel" placeholder="(616) 737-1442" required>
-              </div>
-              <div>
-                <label for="email">Email (Optional)</label>
-                <input id="email" type="email" placeholder="you@example.com">
-              </div>
-            </div>
-
-            <div>
-              <label for="address">Service Address</label>
-              <input id="address" type="text" placeholder="Street address, city, state, zip" required>
-            </div>
-
-            <div>
-              <label for="notes">Additional Notes (Optional)</label>
-              <textarea id="notes" placeholder="Pets, access instructions, priority areas, square footage, etc."></textarea>
-            </div>
-
-            <div class="summary">
-              <div class="summary-head">
-                <h3>Booking Summary</h3>
-                <div style="font-size:24px;">✨</div>
-              </div>
-
-              <div class="summary-grid">
-                <div class="summary-item">
-                  <small>Service</small>
-                  <strong id="summaryService">Deep Clean</strong>
-                </div>
-                <div class="summary-item">
-                  <small>Date</small>
-                  <strong id="summaryDate">Not selected</strong>
-                </div>
-                <div class="summary-item">
-                  <small>Time</small>
-                  <strong id="summaryTime">Not selected</strong>
-                </div>
-              </div>
-            </div>
-
-            <button class="cta" type="submit">🛩️ Request Booking</button>
-
-            <div class="after-note">
-              📞 After submitting, please call or text <strong>616-737-1442</strong> to confirm your booking.
-            </div>
-          </div>
-        </form>
-      </section>
-    </div>
-
-    <section class="features">
-      <div class="feature">
-        <div class="feature-icon">✨</div>
-        <div>
-          <strong>Spotless Results</strong>
-          <span>We don’t cut corners. We clean them.</span>
-        </div>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🕒</div>
-        <div>
-          <strong>On Time</strong>
-          <span>We respect your schedule and your time.</span>
-        </div>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">🛡️</div>
-        <div>
-          <strong>Fully Insured</strong>
-          <span>Your home and business are treated with care.</span>
-        </div>
-      </div>
-
-      <div class="feature">
-        <div class="feature-icon">💚</div>
-        <div>
-          <strong>Satisfaction</strong>
-          <span>Friendly service with a professional touch.</span>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-      <span>✨ Be Clean — Making Spaces Shine</span>
-      <span>💚 616-737-1442</span>
-      <span>Available 24/7</span>
-    </footer>
+  <div class="headline">
+    A cleaner space.<br>
+    A <span class="green">better</span> place.
   </div>
 
-  <script>
-    const form = document.getElementById('bookingForm');
-    const service = document.getElementById('service');
-    const date = document.getElementById('date');
-    const time = document.getElementById('time');
-    const successBox = document.getElementById('successBox');
+  <p>
+    Fast, professional cleaning for homes and businesses.  
+    Available 24/7.
+  </p>
 
-    const summaryService = document.getElementById('summaryService');
-    const summaryDate = document.getElementById('summaryDate');
-    const summaryTime = document.getElementById('summaryTime');
+  <!-- TRUST BADGES -->
+  <div class="badges">
+    <div class="badge">🛡️ Trusted</div>
+    <div class="badge">✨ Insured</div>
+    <div class="badge">🕒 24/7</div>
+  </div>
 
-    function formatDate(value){
-      if(!value) return 'Not selected';
-      const d = new Date(value + 'T00:00:00');
-      return d.toLocaleDateString(undefined, { month:'short', day:'numeric', year:'numeric' });
-    }
+  <!-- BUTTONS -->
+  <div class="contact-buttons">
+    <a class="contact-btn call-btn" href="tel:16167371442">
+      📞 Call 616-737-1442
+    </a>
+    <a class="contact-btn text-btn" href="sms:16167371442">
+      💬 Text 616-737-1442
+    </a>
+  </div>
 
-    function formatTime(value){
-      if(!value) return 'Not selected';
-      const parts = value.split(':');
-      const d = new Date();
-      d.setHours(parts[0], parts[1]);
-      return d.toLocaleTimeString([], { hour:'numeric', minute:'2-digit' });
-    }
+</div>
 
-    function updateSummary(){
-      summaryService.textContent = service.value || 'Not selected';
-      summaryDate.textContent = formatDate(date.value);
-      summaryTime.textContent = formatTime(time.value);
-    }
+<div class="container">
 
-    service.addEventListener('change', updateSummary);
-    date.addEventListener('input', updateSummary);
-    time.addEventListener('input', updateSummary);
+  <!-- SERVICES -->
+  <h2>Our Services</h2>
 
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      successBox.style.display = 'block';
-      successBox.scrollIntoView({ behavior:'smooth', block:'start' });
-      alert('Booking request received. Please call or text 616-737-1442 to confirm.');
-    });
+  <div class="card">🧽 Deep Clean</div>
+  <div class="card">📅 Weekly Clean</div>
+  <div class="card">🗓️ Biweekly Clean</div>
+  <div class="card">🚚 Move In / Move Out</div>
+  <div class="card">🏢 Commercial Clean</div>
 
-    updateSummary();
-  </script>
+  <div class="price">
+    <strong>$35 / hour</strong><br>
+    Available 24/7
+  </div>
+
+  <!-- FORM -->
+  <h2>Request Booking</h2>
+
+  <form onsubmit="submitForm(event)">
+
+    <select id="service">
+      <option>Deep Clean</option>
+      <option>Weekly Clean</option>
+      <option>Biweekly Clean</option>
+      <option>Move In / Move Out</option>
+      <option>Commercial Clean</option>
+    </select>
+
+    <input type="date" id="date" required>
+    <input type="time" id="time" required>
+
+    <input type="text" placeholder="Your name" required>
+    <input type="tel" placeholder="Your phone" required>
+    <input type="text" placeholder="Address" required>
+
+    <textarea placeholder="Notes"></textarea>
+
+    <!-- SUMMARY -->
+    <div class="summary">
+      <strong>Booking Summary</strong><br>
+      Service: <span id="s1">Deep Clean</span><br>
+      Date: <span id="s2">-</span><br>
+      Time: <span id="s3">-</span>
+    </div>
+
+    <button>Request Booking</button>
+
+  </form>
+
+</div>
+
+<script>
+document.getElementById("service").onchange = update;
+document.getElementById("date").oninput = update;
+document.getElementById("time").oninput = update;
+
+function update(){
+  s1.innerText = service.value;
+  s2.innerText = date.value || "-";
+  s3.innerText = time.value || "-";
+}
+
+function submitForm(e){
+  e.preventDefault();
+  alert("Booking submitted! Call or text 616-737-1442 to confirm.");
+}
+</script>
+
 </body>
 </html>
