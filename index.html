@@ -1,73 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Be Clean Booking</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Be Clean | Booking Request</title>
   <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --accent: #111111;
+      --accent-2: #1f2937;
+      --success: #ecfdf5;
+      --success-text: #065f46;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
-      font-family: Arial;
-      background: #f5f7fa;
       margin: 0;
-      padding: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, #ffffff 0%, #eef4ff 35%, var(--bg) 100%);
+      min-height: 100vh;
+      padding: 28px 16px 40px;
     }
-    .card {
-      max-width: 400px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
+    .wrap {
+      max-width: 520px;
+      margin: 0 auto;
     }
+
+    .hero {
+      background: linear-gradient(145deg, #111111, #2b2b2b);
+      color: white;
+      border-radius: 28px;
+      padding: 28px 22px;
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 8px 12px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+      background: rgba(255,255,255,0.06);
+    }
+
     h1 {
+      margin: 0 0 8px;
+      font-size: 40px;
+      line-height: 1;
+    }
+
+    .hero p {
+      margin: 0;
+      color: rgba(255,255,255,0.82);
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    .contact-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .contact-link {
+      text-decoration: none;
+      color: white;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 14px 14px;
+      font-weight: bold;
       text-align: center;
     }
-    button {
-      width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border: none;
-      background: black;
-      color: white;
-      border-radius: 8px;
-      font-size: 16px;
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(17,24,39,0.05);
+      overflow: hidden;
     }
-    input, select {
+
+    .section {
+      padding: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section:last-child {
+      border-bottom: 0;
+    }
+
+    .section-title {
+      margin: 0 0 6px;
+      font-size: 22px;
+    }
+
+    .section-copy {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
       width: 100%;
-      padding: 10px;
-      margin-top: 10px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font-size: 16px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #9ca3af;
+      box-shadow: 0 0 0 4px rgba(17,17,17,0.06);
+    }
+
+    .service-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .service-chip {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px 16px;
+      background: #fafafa;
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .summary {
+      background: #f9fafb;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      margin-top: 18px;
+    }
+
+    .summary h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .summary p {
+      margin: 6px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .cta {
+      width: 100%;
+      border: 0;
+      border-radius: 18px;
+      padding: 17px 18px;
+      background: var(--accent);
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 18px;
+    }
+
+    .note {
+      margin-top: 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .success {
+      display: none;
+      background: var(--success);
+      color: var(--success-text);
+      border: 1px solid #a7f3d0;
+      border-radius: 18px;
+      padding: 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .footer-space {
+      height: 8px;
+    }
+
+    @media (max-width: 560px) {
+      h1 { font-size: 34px; }
+      .contact-row, .two-col { grid-template-columns: 1fr; }
+      .section { padding: 18px; }
     }
   </style>
 </head>
 <body>
+  <div class="wrap">
+    <div class="hero">
+      <div class="eyebrow">Be Clean Booking Request</div>
+      <h1>Be Clean</h1>
+      <p>Professional cleaning requests made simple. Pick your service, choose a preferred date and time, and send your request.</p>
+      <div class="contact-row">
+        <a class="contact-link" href="tel:16167371442">Call 616-737-1442</a>
+        <a class="contact-link" href="sms:16167371442">Text 616-737-1442</a>
+      </div>
+    </div>
 
-<div class="card">
-  <h1>Be Clean</h1>
+    <div class="success" id="successBox">
+      Your booking request is ready. Since this version does not save requests yet, please call or text <strong>616-737-1442</strong> right now to confirm your details.
+    </div>
 
-  <p><b>Call/Text:</b> 616-737-1442</p>
+    <div class="card">
+      <div class="section">
+        <h2 class="section-title">Services</h2>
+        <p class="section-copy">Available 24/7 at <strong>$35 per hour</strong>.</p>
+        <div class="service-list">
+          <div class="service-chip">Deep Clean</div>
+          <div class="service-chip">Weekly Clean</div>
+          <div class="service-chip">Biweekly Clean</div>
+          <div class="service-chip">Move In / Move Out Clean</div>
+          <div class="service-chip">Commercial Clean</div>
+        </div>
+      </div>
 
-  <label>Service</label>
-  <select>
-    <option>Deep Clean</option>
-    <option>Weekly Clean</option>
-    <option>Biweekly Clean</option>
-    <option>Move In/Out Clean</option>
-    <option>Commercial Clean</option>
-  </select>
+      <div class="section">
+        <h2 class="section-title">Request Booking</h2>
+        <p class="section-copy">Fill out your info below. After submitting, call or text Be Clean to confirm.</p>
 
-  <label>Name</label>
-  <input placeholder="Your name">
+        <form id="bookingForm" class="grid">
+          <div>
+            <label for="service">Service</label>
+            <select id="service" required>
+              <option value="Deep Clean">Deep Clean</option>
+              <option value="Weekly Clean">Weekly Clean</option>
+              <option value="Biweekly Clean">Biweekly Clean</option>
+              <option value="Move In / Move Out Clean">Move In / Move Out Clean</option>
+              <option value="Commercial Clean">Commercial Clean</option>
+            </select>
+          </div>
 
-  <label>Phone</label>
-  <input placeholder="Your phone">
+          <div class="two-col">
+            <div>
+              <label for="date">Preferred Date</label>
+              <input id="date" type="date" required />
+            </div>
+            <div>
+              <label for="time">Preferred Time</label>
+              <input id="time" type="time" required />
+            </div>
+          </div>
 
-  <label>Address</label>
-  <input placeholder="Service address">
+          <div>
+            <label for="name">Name</label>
+            <input id="name" type="text" placeholder="Your full name" required />
+          </div>
 
-  <button onclick="alert('Booking request sent! Text 616-737-1442 to confirm.')">
-    Request Booking
-  </button>
-</div>
+          <div class="two-col">
+            <div>
+              <label for="phone">Phone</label>
+              <input id="phone" type="tel" placeholder="Your phone number" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" type="email" placeholder="Optional email" />
+            </div>
+          </div>
 
+          <div>
+            <label for="address">Service Address</label>
+            <input id="address" type="text" placeholder="Street address" required />
+          </div>
+
+          <div>
+            <label for="notes">Notes</label>
+            <textarea id="notes" placeholder="Pets, access instructions, priority areas, square footage, etc."></textarea>
+          </div>
+
+          <div class="summary">
+            <h3>Booking Summary</h3>
+            <p id="summaryService">Service: Deep Clean</p>
+            <p id="summaryDate">Preferred date: Not selected</p>
+            <p id="summaryTime">Preferred time: Not selected</p>
+            <p>Rate: $35/hour</p>
+            <p>Confirmation: Call or text 616-737-1442</p>
+          </div>
+
+          <button class="cta" type="submit">Request Booking</button>
+          <div class="note">This version is live and looks professional, but it does not store requests yet. The next upgrade would be connecting the form to a real database or email service.</div>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-space"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('bookingForm');
+    const service = document.getElementById('service');
+    const date = document.getElementById('date');
+    const time = document.getElementById('time');
+    const successBox = document.getElementById('successBox');
+
+    const summaryService = document.getElementById('summaryService');
+    const summaryDate = document.getElementById('summaryDate');
+    const summaryTime = document.getElementById('summaryTime');
+
+    function updateSummary() {
+      summaryService.textContent = 'Service: ' + service.value;
+      summaryDate.textContent = 'Preferred date: ' + (date.value || 'Not selected');
+      summaryTime.textContent = 'Preferred time: ' + (time.value || 'Not selected');
+    }
+
+    service.addEventListener('change', updateSummary);
+    date.addEventListener('input', updateSummary);
+    time.addEventListener('input', updateSummary);
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      successBox.style.display = 'block';
+      successBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      alert('Booking request received. Please call or text 616-737-1442 to confirm.');
+    });
+
+    updateSummary();
+  </script>
 </body>
 </html>
