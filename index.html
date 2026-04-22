@@ -5,335 +5,956 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Be Clean | Booking Request</title>
   <style>
-    :root {
-      --bg: #f4f7fb;
-      --card: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --line: #e5e7eb;
-      --accent: #111111;
-      --accent-2: #1f2937;
-      --success: #ecfdf5;
-      --success-text: #065f46;
-      --shadow: 0 18px 45px rgba(15, 23, 42, 0.10);
-      --radius: 22px;
+    :root{
+      --blue:#0d4fb8;
+      --blue-dark:#083b8c;
+      --blue-soft:#eaf3ff;
+      --green:#76c20e;
+      --green-dark:#5ba000;
+      --text:#10213a;
+      --muted:#61708a;
+      --line:#dbe6f3;
+      --bg:#eef5fb;
+      --card:#ffffff;
+      --shadow:0 14px 35px rgba(18, 44, 92, 0.14);
+      --radius:24px;
     }
 
-    * { box-sizing: border-box; }
+    *{box-sizing:border-box}
 
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at top left, #ffffff 0%, #eef4ff 35%, var(--bg) 100%);
-      min-height: 100vh;
-      padding: 28px 16px 40px;
+    body{
+      margin:0;
+      font-family:Arial, Helvetica, sans-serif;
+      background:linear-gradient(180deg,#eaf3fb 0%, #f6fbff 100%);
+      color:var(--text);
     }
 
-    .wrap {
-      max-width: 520px;
-      margin: 0 auto;
+    .container{
+      max-width:1100px;
+      margin:0 auto;
+      padding:18px;
     }
 
-    .hero {
-      background: linear-gradient(145deg, #111111, #2b2b2b);
-      color: white;
-      border-radius: 28px;
-      padding: 28px 22px;
-      box-shadow: var(--shadow);
-      margin-bottom: 18px;
+    .hero{
+      background:linear-gradient(135deg,var(--blue) 0%, var(--blue-dark) 100%);
+      color:#fff;
+      border-radius:32px;
+      padding:28px 28px 36px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
     }
 
-    .eyebrow {
-      display: inline-block;
-      font-size: 12px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      border: 1px solid rgba(255,255,255,0.18);
-      padding: 8px 12px;
-      border-radius: 999px;
-      margin-bottom: 14px;
-      background: rgba(255,255,255,0.06);
+    .hero:before,
+    .hero:after{
+      content:"";
+      position:absolute;
+      border-radius:50%;
+      background:rgba(255,255,255,0.10);
     }
 
-    h1 {
-      margin: 0 0 8px;
-      font-size: 40px;
-      line-height: 1;
+    .hero:before{
+      width:220px;
+      height:220px;
+      right:-70px;
+      top:-70px;
     }
 
-    .hero p {
-      margin: 0;
-      color: rgba(255,255,255,0.82);
-      font-size: 16px;
-      line-height: 1.5;
+    .hero:after{
+      width:160px;
+      height:160px;
+      right:110px;
+      bottom:-80px;
     }
 
-    .contact-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-top: 18px;
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr 0.9fr;
+      gap:24px;
+      align-items:center;
+      position:relative;
+      z-index:1;
     }
 
-    .contact-link {
-      text-decoration: none;
-      color: white;
-      border: 1px solid rgba(255,255,255,0.16);
-      background: rgba(255,255,255,0.06);
-      border-radius: 16px;
-      padding: 14px 14px;
-      font-weight: bold;
-      text-align: center;
+    .brand-row{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:10px;
     }
 
-    .card {
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(17,24,39,0.05);
-      overflow: hidden;
+    .logo-badge{
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:34px;
+      color:var(--blue);
+      box-shadow:0 8px 20px rgba(0,0,0,0.15);
+      flex-shrink:0;
     }
 
-    .section {
-      padding: 22px;
-      border-bottom: 1px solid var(--line);
+    .brand-title{
+      margin:0;
+      font-size:56px;
+      line-height:1;
+      font-weight:800;
+      letter-spacing:-0.03em;
     }
 
-    .section:last-child {
-      border-bottom: 0;
+    .brand-title .green{
+      color:#9be32b;
     }
 
-    .section-title {
-      margin: 0 0 6px;
-      font-size: 22px;
+    .brand-sub{
+      margin:4px 0 0;
+      font-size:14px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.88);
+      font-weight:bold;
     }
 
-    .section-copy {
-      margin: 0;
-      color: var(--muted);
-      line-height: 1.5;
-      font-size: 14px;
+    .headline{
+      margin:22px 0 12px;
+      font-size:56px;
+      line-height:0.98;
+      font-weight:800;
+      letter-spacing:-0.04em;
     }
 
-    .grid {
-      display: grid;
-      gap: 14px;
-      margin-top: 18px;
+    .headline .green{
+      color:#9be32b;
+      font-style:italic;
     }
 
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
+    .hero-copy{
+      margin:0 0 18px;
+      font-size:18px;
+      color:rgba(255,255,255,.9);
+      max-width:520px;
+      line-height:1.5;
     }
 
-    label {
-      display: block;
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 8px;
+    .contact-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-top:16px;
     }
 
-    input, select, textarea {
-      width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px 16px;
-      font-size: 16px;
-      background: #fff;
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    .contact-btn{
+      text-decoration:none;
+      color:#fff;
+      font-weight:800;
+      font-size:22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-width:240px;
+      padding:18px 22px;
+      border-radius:999px;
+      box-shadow:0 8px 18px rgba(0,0,0,.18);
     }
 
-    textarea {
-      min-height: 110px;
-      resize: vertical;
+    .call-btn{ background:var(--green); }
+    .text-btn{ background:#2382ff; }
+
+    .hero-art{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:300px;
     }
 
-    input:focus, select:focus, textarea:focus {
-      border-color: #9ca3af;
-      box-shadow: 0 0 0 4px rgba(17,17,17,0.06);
+    .bucket{
+      position:relative;
+      width:320px;
+      height:260px;
     }
 
-    .service-list {
-      display: grid;
-      gap: 10px;
-      margin-top: 16px;
+    .bubble{
+      position:absolute;
+      border-radius:50%;
+      background:rgba(255,255,255,0.35);
+      box-shadow:inset 0 0 0 2px rgba(255,255,255,0.12);
     }
 
-    .service-chip {
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 14px 16px;
-      background: #fafafa;
-      font-weight: bold;
-      font-size: 15px;
+    .bubble.b1{ width:30px;height:30px; right:10px; top:10px;}
+    .bubble.b2{ width:18px;height:18px; left:20px; top:40px;}
+    .bubble.b3{ width:42px;height:42px; right:55px; top:55px;}
+    .bubble.b4{ width:26px;height:26px; right:110px; bottom:28px;}
+
+    .sparkle{
+      position:absolute;
+      color:#fff;
+      font-size:28px;
+      opacity:.95;
     }
 
-    .summary {
-      background: #f9fafb;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 16px;
-      margin-top: 18px;
+    .sparkle.s1{left:30px; top:20px}
+    .sparkle.s2{right:20px; top:90px}
+    .sparkle.s3{left:90px; bottom:10px}
+
+    .bucket-base{
+      position:absolute;
+      bottom:20px;
+      left:50%;
+      transform:translateX(-50%);
+      width:210px;
+      height:135px;
+      background:linear-gradient(180deg,#2e87ff 0%, #115fd2 100%);
+      border-radius:20px 20px 30px 30px;
+      box-shadow:0 18px 25px rgba(0,0,0,0.22);
+      border:4px solid rgba(255,255,255,.22);
     }
 
-    .summary h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
+    .bucket-handle{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      bottom:105px;
+      width:170px;
+      height:120px;
+      border:8px solid #9ec4ff;
+      border-bottom:none;
+      border-radius:120px 120px 0 0;
+      opacity:.92;
     }
 
-    .summary p {
-      margin: 6px 0;
-      color: var(--muted);
-      font-size: 14px;
+    .bottle{
+      position:absolute;
+      bottom:130px;
+      border-radius:18px;
+      box-shadow:0 10px 20px rgba(0,0,0,0.18);
     }
 
-    .cta {
-      width: 100%;
-      border: 0;
-      border-radius: 18px;
-      padding: 17px 18px;
-      background: var(--accent);
-      color: white;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 18px;
+    .bottle.green{
+      left:125px;
+      width:74px;
+      height:132px;
+      background:linear-gradient(180deg,#95e61a 0%, #5aad00 100%);
+      transform:rotate(2deg);
     }
 
-    .note {
-      margin-top: 14px;
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--muted);
-      text-align: center;
+    .bottle.white{
+      left:195px;
+      width:58px;
+      height:122px;
+      background:linear-gradient(180deg,#ffffff 0%, #d9dfeb 100%);
+      transform:rotate(-4deg);
     }
 
-    .success {
-      display: none;
-      background: var(--success);
-      color: var(--success-text);
-      border: 1px solid #a7f3d0;
-      border-radius: 18px;
-      padding: 16px;
-      font-size: 14px;
-      line-height: 1.5;
-      margin-bottom: 16px;
+    .bottle.blue{
+      left:78px;
+      width:50px;
+      height:102px;
+      background:linear-gradient(180deg,#79c7ff 0%, #2574df 100%);
+      transform:rotate(-10deg);
     }
 
-    .footer-space {
-      height: 8px;
+    .spray-head{
+      position:absolute;
+      width:30px;
+      height:20px;
+      background:#8be21e;
+      right:-8px;
+      top:-10px;
+      border-radius:8px 8px 8px 0;
     }
 
-    @media (max-width: 560px) {
-      h1 { font-size: 34px; }
-      .contact-row, .two-col { grid-template-columns: 1fr; }
-      .section { padding: 18px; }
+    .spray-head:after{
+      content:"";
+      position:absolute;
+      right:-10px;
+      top:4px;
+      width:20px;
+      height:8px;
+      border-radius:0 6px 6px 0;
+      background:#8be21e;
+    }
+
+    .cap{
+      position:absolute;
+      left:50%;
+      transform:translateX(-50%);
+      top:-12px;
+      width:24px;
+      height:18px;
+      background:#5db0ff;
+      border-radius:8px 8px 0 0;
+    }
+
+    .towel{
+      position:absolute;
+      left:146px;
+      bottom:64px;
+      width:78px;
+      height:112px;
+      background:linear-gradient(180deg,#c1f55c 0%, #9ed638 100%);
+      border-radius:8px;
+      transform:rotate(2deg);
+      box-shadow:0 10px 20px rgba(0,0,0,0.18);
+    }
+
+    .brush{
+      position:absolute;
+      right:18px;
+      bottom:12px;
+      width:110px;
+      height:42px;
+      background:#fff;
+      border-radius:16px;
+      box-shadow:0 8px 15px rgba(0,0,0,.18);
+    }
+
+    .brush:before{
+      content:"";
+      position:absolute;
+      left:0;
+      right:0;
+      top:-10px;
+      margin:auto;
+      width:70px;
+      height:16px;
+      background:#2a83ff;
+      border-radius:10px 10px 0 0;
+    }
+
+    .brush:after{
+      content:"";
+      position:absolute;
+      left:10px;
+      right:10px;
+      bottom:-14px;
+      height:16px;
+      background:repeating-linear-gradient(
+        90deg,
+        #d8e4f8 0 6px,
+        #ffffff 6px 12px
+      );
+      border-radius:0 0 10px 10px;
+    }
+
+    .wave{
+      margin-top:-22px;
+      height:44px;
+      background:linear-gradient(180deg,#8ed13e 0%, #d9f3b0 100%);
+      border-radius:0 0 28px 28px;
+      position:relative;
+      z-index:2;
+    }
+
+    .wave:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:#fff;
+      clip-path:ellipse(75% 80% at 50% 0%);
+      border-radius:0 0 28px 28px;
+    }
+
+    .main-grid{
+      display:grid;
+      grid-template-columns:320px 1fr;
+      gap:18px;
+      margin-top:18px;
+    }
+
+    .panel{
+      background:var(--card);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      border:1px solid rgba(17,24,39,.05);
+      padding:22px;
+    }
+
+    .panel h2{
+      margin:0 0 8px;
+      font-size:24px;
+      color:#12356e;
+    }
+
+    .panel .sub{
+      margin:0 0 18px;
+      color:var(--muted);
+      line-height:1.5;
+      font-size:14px;
+    }
+
+    .underline{
+      width:58px;
+      height:4px;
+      border-radius:999px;
+      background:var(--green);
+      margin:10px 0 18px;
+    }
+
+    .service-card{
+      display:flex;
+      gap:14px;
+      align-items:flex-start;
+      background:#f3f7fc;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+      margin-bottom:12px;
+    }
+
+    .service-icon{
+      width:58px;
+      height:58px;
+      border-radius:16px;
+      background:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:30px;
+      flex-shrink:0;
+      box-shadow:0 6px 12px rgba(0,0,0,.08);
+    }
+
+    .service-card h3{
+      margin:2px 0 6px;
+      font-size:18px;
+      color:#11305f;
+    }
+
+    .service-card p{
+      margin:0;
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.45;
+    }
+
+    .price-box{
+      background:#eef8e9;
+      border:1px solid #d7edc6;
+      border-radius:18px;
+      padding:18px;
+      text-align:left;
+      margin-top:16px;
+    }
+
+    .price-big{
+      font-size:26px;
+      font-weight:800;
+      color:#53a500;
+      margin:0 0 8px;
+    }
+
+    .price-small{
+      margin:0;
+      color:var(--muted);
+      line-height:1.5;
+      font-size:14px;
+    }
+
+    .trust-box{
+      margin-top:14px;
+      background:#f7fbff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .trust-box strong{
+      display:block;
+      color:#12356e;
+      margin-bottom:6px;
+      font-size:16px;
+    }
+
+    .trust-box span{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .form-head{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .form-head-icon{
+      width:48px;
+      height:48px;
+      border-radius:14px;
+      background:#eff6ff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:26px;
+    }
+
+    form{
+      margin-top:14px;
+    }
+
+    .form-grid{
+      display:grid;
+      gap:16px;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    label{
+      display:block;
+      font-weight:700;
+      font-size:15px;
+      margin-bottom:8px;
+      color:#17386d;
+    }
+
+    input, select, textarea{
+      width:100%;
+      border:1px solid #cad9eb;
+      border-radius:14px;
+      padding:15px 16px;
+      font-size:16px;
+      background:#fff;
+      color:var(--text);
+      outline:none;
+      transition:.15s ease;
+    }
+
+    textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+
+    input:focus, select:focus, textarea:focus{
+      border-color:#69a7ff;
+      box-shadow:0 0 0 4px rgba(36,130,255,.12);
+    }
+
+    .summary{
+      margin-top:8px;
+      background:#edf5ff;
+      border:1px solid #cfe0f5;
+      border-radius:18px;
+      padding:16px;
+    }
+
+    .summary-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-bottom:10px;
+    }
+
+    .summary-header h3{
+      margin:0;
+      font-size:22px;
+      color:#1850a7;
+    }
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr 1fr;
+      gap:12px;
+    }
+
+    .summary-item{
+      background:rgba(255,255,255,.55);
+      border-radius:14px;
+      padding:12px;
+    }
+
+    .summary-item small{
+      display:block;
+      color:var(--muted);
+      margin-bottom:6px;
+      font-size:13px;
+    }
+
+    .summary-item strong{
+      font-size:17px;
+      color:#12356e;
+    }
+
+    .cta{
+      width:100%;
+      margin-top:16px;
+      border:none;
+      background:var(--green);
+      color:#fff;
+      border-radius:18px;
+      padding:18px 20px;
+      font-size:20px;
+      font-weight:800;
+      cursor:pointer;
+      box-shadow:0 8px 20px rgba(118,194,14,.28);
+    }
+
+    .cta:hover{
+      background:var(--green-dark);
+    }
+
+    .after-note{
+      margin-top:14px;
+      color:#33507c;
+      font-size:14px;
+      line-height:1.5;
+      text-align:center;
+    }
+
+    .feature-strip{
+      margin-top:18px;
+      background:#fff;
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:18px 20px;
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+
+    .feature{
+      display:flex;
+      align-items:flex-start;
+      gap:12px;
+      padding:8px;
+    }
+
+    .feature-icon{
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+      flex-shrink:0;
+    }
+
+    .feature:nth-child(1) .feature-icon{background:#edf4ff}
+    .feature:nth-child(2) .feature-icon{background:#ecf8df}
+    .feature:nth-child(3) .feature-icon{background:#edf4ff}
+    .feature:nth-child(4) .feature-icon{background:#ecf8df}
+
+    .feature strong{
+      display:block;
+      margin-bottom:4px;
+      color:#18386d;
+      font-size:17px;
+    }
+
+    .feature span{
+      color:var(--muted);
+      font-size:14px;
+      line-height:1.4;
+    }
+
+    .footer-bar{
+      margin-top:18px;
+      background:linear-gradient(135deg,var(--blue) 0%, var(--blue-dark) 100%);
+      color:#fff;
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      padding:18px 24px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+      font-weight:700;
+    }
+
+    .footer-bar span{
+      opacity:.95;
+    }
+
+    .success{
+      display:none;
+      margin-bottom:14px;
+      background:#ebfff2;
+      color:#0f6a3d;
+      border:1px solid #b7efcb;
+      border-radius:18px;
+      padding:16px;
+      line-height:1.5;
+      font-size:14px;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid,
+      .main-grid,
+      .feature-strip{
+        grid-template-columns:1fr;
+      }
+
+      .hero-art{
+        min-height:240px;
+      }
+    }
+
+    @media (max-width: 700px){
+      .brand-title{font-size:42px}
+      .headline{font-size:42px}
+      .contact-buttons{flex-direction:column}
+      .contact-btn{min-width:unset;width:100%}
+      .two-col,
+      .summary-grid{
+        grid-template-columns:1fr;
+      }
+      .container{padding:14px}
+      .hero{padding:22px 18px 30px}
+      .panel{padding:18px}
     }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <div class="eyebrow">Be Clean Booking Request</div>
-      <h1>Be Clean</h1>
-      <p>Professional cleaning requests made simple. Pick your service, choose a preferred date and time, and send your request.</p>
-      <div class="contact-row">
-        <a class="contact-link" href="tel:16167371442">Call 616-737-1442</a>
-        <a class="contact-link" href="sms:16167371442">Text 616-737-1442</a>
+  <div class="container">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="brand-row">
+            <div class="logo-badge">🏠</div>
+            <div>
+              <h1 class="brand-title">Be <span class="green">Clean</span></h1>
+              <p class="brand-sub">Professional Cleaning Services</p>
+            </div>
+          </div>
+
+          <div class="headline">
+            A cleaner space.<br>
+            A <span class="green">better</span> place.
+          </div>
+
+          <p class="hero-copy">
+            Fast, friendly, professional cleaning requests for homes and businesses. Available 24/7 for deep cleans, recurring service, move-in/move-out jobs, and commercial cleaning.
+          </p>
+
+          <div class="contact-buttons">
+            <a class="contact-btn call-btn" href="tel:16167371442">📞 Call 616-737-1442</a>
+            <a class="contact-btn text-btn" href="sms:16167371442">💬 Text 616-737-1442</a>
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <div class="bucket">
+            <div class="bubble b1"></div>
+            <div class="bubble b2"></div>
+            <div class="bubble b3"></div>
+            <div class="bubble b4"></div>
+            <div class="sparkle s1">✦</div>
+            <div class="sparkle s2">✦</div>
+            <div class="sparkle s3">✦</div>
+
+            <div class="bucket-handle"></div>
+            <div class="bucket-base"></div>
+            <div class="bottle blue"><div class="cap"></div></div>
+            <div class="bottle green"><div class="spray-head"></div></div>
+            <div class="bottle white"></div>
+            <div class="towel"></div>
+            <div class="brush"></div>
+          </div>
+        </div>
       </div>
+    </section>
+
+    <div class="wave"></div>
+
+    <div class="main-grid">
+      <aside class="panel">
+        <h2>Our Services</h2>
+        <div class="underline"></div>
+
+        <div class="service-card">
+          <div class="service-icon">🧽</div>
+          <div>
+            <h3>Deep Clean</h3>
+            <p>Top to bottom detailed cleaning for kitchens, bathrooms, floors, and more.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">📅</div>
+          <div>
+            <h3>Weekly Clean</h3>
+            <p>Keep your home or office consistently fresh and under control.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🗓️</div>
+          <div>
+            <h3>Biweekly Clean</h3>
+            <p>Perfect every-two-week scheduling for regular maintenance cleaning.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🚚</div>
+          <div>
+            <h3>Move In / Move Out</h3>
+            <p>Fresh-start cleaning for apartments, rentals, and home transitions.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🏢</div>
+          <div>
+            <h3>Commercial Clean</h3>
+            <p>Professional cleaning for offices and business spaces.</p>
+          </div>
+        </div>
+
+        <div class="price-box">
+          <p class="price-big">$35 / hour</p>
+          <p class="price-small"><strong>Available 24/7</strong><br>We work around your schedule.</p>
+        </div>
+
+        <div class="trust-box">
+          <strong>🛡️ Trusted • Reliable • Insured</strong>
+          <span>Your satisfaction is our priority.</span>
+        </div>
+      </aside>
+
+      <section class="panel">
+        <div class="form-head">
+          <div class="form-head-icon">🗓️</div>
+          <div>
+            <h2 style="margin:0;">Request a Booking</h2>
+            <p class="sub" style="margin:6px 0 0;">Fill out the form below and call or text to confirm your appointment.</p>
+          </div>
+        </div>
+
+        <div class="success" id="successBox">
+          Booking request received. Please call or text <strong>616-737-1442</strong> now to confirm your appointment details.
+        </div>
+
+        <form id="bookingForm">
+          <div class="form-grid">
+            <div>
+              <label for="service">Service</label>
+              <select id="service" required>
+                <option value="Deep Clean">Deep Clean</option>
+                <option value="Weekly Clean">Weekly Clean</option>
+                <option value="Biweekly Clean">Biweekly Clean</option>
+                <option value="Move In / Move Out">Move In / Move Out</option>
+                <option value="Commercial Clean">Commercial Clean</option>
+              </select>
+            </div>
+
+            <div class="two-col">
+              <div>
+                <label for="date">Preferred Date</label>
+                <input id="date" type="date" required>
+              </div>
+              <div>
+                <label for="time">Preferred Time</label>
+                <input id="time" type="time" required>
+              </div>
+            </div>
+
+            <div>
+              <label for="name">Your Name</label>
+              <input id="name" type="text" placeholder="Full name" required>
+            </div>
+
+            <div class="two-col">
+              <div>
+                <label for="phone">Phone Number</label>
+                <input id="phone" type="tel" placeholder="(616) 737-1442" required>
+              </div>
+              <div>
+                <label for="email">Email (Optional)</label>
+                <input id="email" type="email" placeholder="you@example.com">
+              </div>
+            </div>
+
+            <div>
+              <label for="address">Service Address</label>
+              <input id="address" type="text" placeholder="Street address, city, state, zip" required>
+            </div>
+
+            <div>
+              <label for="notes">Additional Notes (Optional)</label>
+              <textarea id="notes" placeholder="Pets, access instructions, priority areas, square footage, etc."></textarea>
+            </div>
+
+            <div class="summary">
+              <div class="summary-header">
+                <h3>Booking Summary</h3>
+                <div style="font-size:26px;">✨</div>
+              </div>
+
+              <div class="summary-grid">
+                <div class="summary-item">
+                  <small>Service</small>
+                  <strong id="summaryService">Deep Clean</strong>
+                </div>
+                <div class="summary-item">
+                  <small>Date</small>
+                  <strong id="summaryDate">Not selected</strong>
+                </div>
+                <div class="summary-item">
+                  <small>Time</small>
+                  <strong id="summaryTime">Not selected</strong>
+                </div>
+              </div>
+            </div>
+
+            <button class="cta" type="submit">🛩️ Request Booking</button>
+
+            <div class="after-note">
+              📞 After submitting, please call or text <strong>616-737-1442</strong> to confirm your booking.
+            </div>
+          </div>
+        </form>
+      </section>
     </div>
 
-    <div class="success" id="successBox">
-      Your booking request is ready. Since this version does not save requests yet, please call or text <strong>616-737-1442</strong> right now to confirm your details.
-    </div>
-
-    <div class="card">
-      <div class="section">
-        <h2 class="section-title">Services</h2>
-        <p class="section-copy">Available 24/7 at <strong>$35 per hour</strong>.</p>
-        <div class="service-list">
-          <div class="service-chip">Deep Clean</div>
-          <div class="service-chip">Weekly Clean</div>
-          <div class="service-chip">Biweekly Clean</div>
-          <div class="service-chip">Move In / Move Out Clean</div>
-          <div class="service-chip">Commercial Clean</div>
+    <section class="feature-strip">
+      <div class="feature">
+        <div class="feature-icon">✨</div>
+        <div>
+          <strong>Spotless Results</strong>
+          <span>We don’t cut corners. We clean them.</span>
         </div>
       </div>
 
-      <div class="section">
-        <h2 class="section-title">Request Booking</h2>
-        <p class="section-copy">Fill out your info below. After submitting, call or text Be Clean to confirm.</p>
-
-        <form id="bookingForm" class="grid">
-          <div>
-            <label for="service">Service</label>
-            <select id="service" required>
-              <option value="Deep Clean">Deep Clean</option>
-              <option value="Weekly Clean">Weekly Clean</option>
-              <option value="Biweekly Clean">Biweekly Clean</option>
-              <option value="Move In / Move Out Clean">Move In / Move Out Clean</option>
-              <option value="Commercial Clean">Commercial Clean</option>
-            </select>
-          </div>
-
-          <div class="two-col">
-            <div>
-              <label for="date">Preferred Date</label>
-              <input id="date" type="date" required />
-            </div>
-            <div>
-              <label for="time">Preferred Time</label>
-              <input id="time" type="time" required />
-            </div>
-          </div>
-
-          <div>
-            <label for="name">Name</label>
-            <input id="name" type="text" placeholder="Your full name" required />
-          </div>
-
-          <div class="two-col">
-            <div>
-              <label for="phone">Phone</label>
-              <input id="phone" type="tel" placeholder="Your phone number" required />
-            </div>
-            <div>
-              <label for="email">Email</label>
-              <input id="email" type="email" placeholder="Optional email" />
-            </div>
-          </div>
-
-          <div>
-            <label for="address">Service Address</label>
-            <input id="address" type="text" placeholder="Street address" required />
-          </div>
-
-          <div>
-            <label for="notes">Notes</label>
-            <textarea id="notes" placeholder="Pets, access instructions, priority areas, square footage, etc."></textarea>
-          </div>
-
-          <div class="summary">
-            <h3>Booking Summary</h3>
-            <p id="summaryService">Service: Deep Clean</p>
-            <p id="summaryDate">Preferred date: Not selected</p>
-            <p id="summaryTime">Preferred time: Not selected</p>
-            <p>Rate: $35/hour</p>
-            <p>Confirmation: Call or text 616-737-1442</p>
-          </div>
-
-          <button class="cta" type="submit">Request Booking</button>
-          <div class="note">This version is live and looks professional, but it does not store requests yet. The next upgrade would be connecting the form to a real database or email service.</div>
-        </form>
+      <div class="feature">
+        <div class="feature-icon">🕒</div>
+        <div>
+          <strong>On Time</strong>
+          <span>We respect your schedule and your time.</span>
+        </div>
       </div>
-    </div>
 
-    <div class="footer-space"></div>
+      <div class="feature">
+        <div class="feature-icon">🛡️</div>
+        <div>
+          <strong>Fully Insured</strong>
+          <span>Your home and business are treated with care.</span>
+        </div>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">💚</div>
+        <div>
+          <strong>Satisfaction</strong>
+          <span>Friendly service with a professional touch.</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-bar">
+      <span>✨ Be Clean — Making Spaces Shine</span>
+      <span>💚 616-737-1442</span>
+      <span>Available 24/7</span>
+    </footer>
   </div>
 
   <script>
@@ -347,20 +968,34 @@
     const summaryDate = document.getElementById('summaryDate');
     const summaryTime = document.getElementById('summaryTime');
 
-    function updateSummary() {
-      summaryService.textContent = 'Service: ' + service.value;
-      summaryDate.textContent = 'Preferred date: ' + (date.value || 'Not selected');
-      summaryTime.textContent = 'Preferred time: ' + (time.value || 'Not selected');
+    function formatDate(value){
+      if(!value) return 'Not selected';
+      const d = new Date(value + 'T00:00:00');
+      return d.toLocaleDateString(undefined, { month:'short', day:'numeric', year:'numeric' });
+    }
+
+    function formatTime(value){
+      if(!value) return 'Not selected';
+      const [h, m] = value.split(':');
+      const d = new Date();
+      d.setHours(h, m);
+      return d.toLocaleTimeString([], { hour:'numeric', minute:'2-digit' });
+    }
+
+    function updateSummary(){
+      summaryService.textContent = service.value || 'Not selected';
+      summaryDate.textContent = formatDate(date.value);
+      summaryTime.textContent = formatTime(time.value);
     }
 
     service.addEventListener('change', updateSummary);
     date.addEventListener('input', updateSummary);
     time.addEventListener('input', updateSummary);
 
-    form.addEventListener('submit', function (e) {
+    form.addEventListener('submit', function(e){
       e.preventDefault();
       successBox.style.display = 'block';
-      successBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      successBox.scrollIntoView({ behavior:'smooth', block:'start' });
       alert('Booking request received. Please call or text 616-737-1442 to confirm.');
     });
 
